@@ -3,7 +3,8 @@ const {
 } = require('../data/sys_logs')
 const {
     user_find,
-    userInfo_find
+    userInfo_find,
+    webmaster_find
 } = require('../data/users')
 const {
     create_token
@@ -71,7 +72,7 @@ async function get_userInfo(req) {
         })
     return {
         code: queryRes.code ?? 2000,
-        msg: queryRes.msg ?? '查询信息作者信息成功',
+        msg: queryRes.msg ?? '查询作者信息成功',
         data: queryRes.code ? {} : {
             writerInfo: queryRes
         }
@@ -79,8 +80,26 @@ async function get_userInfo(req) {
 
 }
 
+// webmaster 
+async function get_webmasterInfo() {
+    const queryRes = await webmaster_find().catch((err) => {
+        return {
+            code: 4000,
+            msg: '查询站长信息出错了'
+        }
+    })
+    return {
+        code: queryRes.code ?? 2000,
+        msg: queryRes.msg ?? '查询站长信息成功',
+        data: queryRes.code ? {} : {
+            webmasterInfo: queryRes
+        }
+    }
+}
+
 module.exports = {
     user_login,
     user_refresh,
-    get_userInfo
+    get_userInfo,
+    get_webmasterInfo
 }

@@ -29,6 +29,8 @@ const usersSchema = mongoose.Schema({
         type: String,
         default: 'http://localhost:3000/avatar/avatar.gif'
     },
+    role: String,
+    bg_images: Array
 })
 
 const usersModel = mongoose.model('user', usersSchema)

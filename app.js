@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 
 const db = require('./db/connect')
 const visit_logs = require('./db/visit_logs')
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({

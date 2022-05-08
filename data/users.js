@@ -44,8 +44,31 @@ function userInfo_find(condition) {
             })
     })
 }
+ 
+/* get webmasterInfo */
+function webmaster_find() {
+    return new Promise((resolve, reject) => {
+        usersModel.findOne({
+            role: 'root'
+        })
+        .select('-_id -userAccount -userPassword -role')
+            .exec((err, doc) => {
+                if (!err) {
+                    if (doc) {
+                        resolve(doc)
+                    } else {
+                        console.log(doc)
+                        reject()
+                    }
+                } else {
+                    reject()
+                }
+            })
+    })
+}
 
 module.exports = {
     user_find,
-    userInfo_find
+    userInfo_find,
+    webmaster_find
 }

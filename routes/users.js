@@ -3,7 +3,8 @@ var router = express.Router();
 const {
   user_login,
   user_refresh,
-  get_userInfo
+  get_userInfo,
+  get_webmasterInfo
 } = require('../controller/usersCtrl')
 
 /* user login */
@@ -24,6 +25,11 @@ router.post('/refresh', async (req, res, next) => {
 /* get userInfo  */
 router.get('/writerInfo', async (req, res) => {
   res.json(await get_userInfo(req.query))
+})
+
+/* get webmasterInfo */
+router.post('/webMasterInfo', async (req, res) => {
+  res.json(await get_webmasterInfo())
 })
 
 module.exports = router;
